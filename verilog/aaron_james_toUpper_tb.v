@@ -46,11 +46,10 @@ module toUpper_tb;
 		// Apply each vector and display results
 		for (i = 0; i < 19; i = i + 1) begin
 			in = vectors[i];
-			#25.1; // wait for propagation
+			#25.001; // wait for propagation
 			$display("%4dns | %7d %b %s | %7d %b %s", $time, in, in, format_char(in), out, out, format_char(out));
 		end
 
-		#20;
 		$display("Test complete.");
 		$finish;
 	end
