@@ -33,3 +33,4 @@ module toUpper(
     buf b7 (out[7], in[7]);
 
 endmodule
+
