@@ -1,5 +1,8 @@
 # Verilog toUpper
 
+The project can be found [here.](https://github.com/AstralTurtle/211-p1) (https://github.com/AstralTurtle/211-p1)
+
+
 ## Kmap 
 The kmap was filled in using a python/pandas script in main.py. This scirpt generates a csv file representation of the kmap where the lowercase letters are 1 while everything else is zero,
 
