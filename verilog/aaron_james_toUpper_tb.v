@@ -5,10 +5,8 @@ module toUpper_tb;
 	reg [7:0] in;
 	wire [7:0] out;
 
-	// Instantiate DUT
 	toUpper dut (.in(in), .out(out));
 
-	// Test vectors: decimal, binary (for readability), comment (symbol)
 	reg [7:0] vectors [0:18];
 
 	integer i;
@@ -27,7 +25,7 @@ module toUpper_tb;
 		vectors[9]  = 8'd122;  // 01111010  'z'
 		vectors[10] = 8'd71;   // 01000111  'G'
 		vectors[11] = 8'd109;  // 01101101  'm'
-		vectors[12] = 8'd146;  // 10010010  '\'' (note: 146 is non-ASCII printable here)
+		vectors[12] = 8'd146;  // 10010010  '\'
 		vectors[13] = 8'd48;   // 00110000  '0'
 		vectors[14] = 8'd207;  // 11001111  'Ï'
 		vectors[15] = 8'd58;   // 00111010  ':'
@@ -35,18 +33,15 @@ module toUpper_tb;
 		vectors[17] = 8'd148;  // 10000100  '”'
 		vectors[18] = 8'd127;  // 01111111  'DEL'
 
-		// Start VCD dump
 		$dumpfile("toUpper_tb.vcd");
 		$dumpvars(0, toUpper_tb);
 
-		// Header for human-readable output
 		$display("time ns |  in(dec) in(bin)  in(char) | out(dec) out(bin) out(char)");
 		$display("---------------------------------------------------------------------");
 
-		// Apply each vector and display results
 		for (i = 0; i < 19; i = i + 1) begin
 			in = vectors[i];
-			#25.001; // wait for propagation
+			#25.001; // wait for circuit
 			$display("%4dns | %7d %b %s | %7d %b %s", $time, in, in, format_char(in), out, out, format_char(out));
 		end
 
@@ -54,14 +49,12 @@ module toUpper_tb;
 		$finish;
 	end
 
-	// Function to format a byte as printable char or '.' if non-printable
-	function [8*4:1] format_char; // return up to 4 chars (enough for annotations)
+	function [8*4:1] format_char; 
 		input [7:0] b;
 		begin
 			if (b >= 8'd32 && b <= 8'd126) begin
 				format_char = {1'b0, b};
 			end else begin
-				// return a short label for a few known control codes, else '.'
 				case (b)
 					8'd127: format_char = "DEL";
 					8'd20:  format_char = "DC4";
