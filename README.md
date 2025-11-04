@@ -1,9 +1,25 @@
 # Verilog toUpper
 
 The project can be found [here.](https://github.com/AstralTurtle/211-p1) (https://github.com/AstralTurtle/211-p1)
+## Function specification
+
+<!-- Describe in technology agnostic language how the function operates. Note that this step should provide enough clarity such that someone unfamiliar with toUpper() could build the function correctly. -->
 
 
-## Kmap 
+The toUpper() function turns  converts 8-bit ASCII lowercase letters to 8-bit ASCII uppercase letters. In ASCII, the lowercase letters range 97-122, while the uppercase letters range 65-97. We can determine that the function must subtract 32 from letters in the lowercase range, which can be done by flipping the bit in position 5 (0 indexed). The logic could be considered like this
+
+*if* input in range 97-122
+output the input, with position 5 = 0 
+*else*
+output the input
+
+## Circuit design
+
+ <!-- Determine the combination of primitive logic gates that ensures each bit is correct. Your unminimized design should be expressed in canonical minterm form. Your minimized design should be in sum of products standard form. While it is possible to minimize your circuit by means of applying Boolean algebraic theorems, it is more reliable to leverage Karnaugh maps. Discuss your minimization process. -->
+
+
+
+### Kmap 
 The kmap was filled in using a python/pandas script in main.py. This scirpt generates a csv file representation of the kmap where the lowercase letters are 1 while everything else is zero,
 
  This was then imported into google sheets, where I highlighted the letters that would be changed by the function, and then mapped the kmap to be A5 out. I then imported an image of that into a pdf editing file and grouped my kmap as seen below.
@@ -12,19 +28,21 @@ The kmap was filled in using a python/pandas script in main.py. This scirpt gene
 
 The yellow background squares are the lowercase letters, which have their value forcibly set to one. Then I grouped my ones to get a Sum of Product equation:
 
-**F=A6′A5+A7A5+A7′A6A5A4′A3′A2′A1′A0′+A7′A6A5A4A3A2+A7′A6A5A4A3A2′A1A0**
+**F=A6′A5 + A7A5+A7′A6A5A4′A3′A2′A1′A0′ + A7′A6A5A4A3A2 + A7′A6A5A4A3A2′A1A0**
 
-## Testbench vvp
+## Implementation/Testing
+
+### Testbench vvp
 
 ![alt text](image-3.png)
 
 Here is the testbench vvp being executed after compiling. It shows that at any time higher then 25 ns, the circuit has correct output. The circuit is tested using 25.001 delay.
 
-## First waveform: '('
+### First waveform: '('
 ![alt text](image.png)
 Here is the first test in waveform form, taking in '(' as an input. This returns '(' after 25 ns.
 
-## a -> A
+### a -> A
 ![alt text](image-1.png)
 
 Here is a later waveform, that takes in 'a' and returns 'A' after 25 ns.
