@@ -41,7 +41,7 @@ module toUpper_tb;
 
 		for (i = 0; i < 19; i = i + 1) begin
 			in = vectors[i];
-			#25.001; // wait for circuit
+			#25; // wait for circuit
 			$display("%4dns | %7d %b %s | %7d %b %s", $time, in, in, format_char(in), out, out, format_char(out));
 		end
 
